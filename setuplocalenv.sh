@@ -27,9 +27,3 @@ alias gac=gitAddCommit
 alias gpull='git pull --rebase'
 alias gpush='gpull; git push'
 
-
-# BOX specific setup
-
-# PROJECT(s) specific stuff
-
-
