@@ -4,7 +4,8 @@ export PATH=$HOME/bin:$PATH
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-
+alias c='clear'
+alias q='quit'
 alias d='cd $HOME/Downloads'
 alias dev='cd $HOME/dev'
 # SBT 
@@ -18,4 +19,6 @@ alias gcommit='git commit -m "$1"'
 alias gac=gitAddCommit
 alias gpull='git pull --rebase'
 alias gpush='gpull; git push'
+
+
 
