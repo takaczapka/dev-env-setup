@@ -14,4 +14,8 @@ git config --global receive.denyNonFastForwards true
 # list all alises 
 git config --global alias.aliases '!git config --get-regexp alias'
 # always rebase
-git config --global alias.pullr '!git pull --rebase'
+git config --global alias.pu '!git pull --rebase'
+# colorful log
+git config --global alias.l '!git log --graph --all --format=format:"%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)" --abbrev-commit --date=relative'
+git config --global alias.yesterday '!git l --graph --all --since=day.before.yesterday.midnight --until=midnight'
+git config --global alias.today '!git l --graph --all --since=midnight'
