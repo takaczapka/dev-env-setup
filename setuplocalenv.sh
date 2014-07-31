@@ -38,3 +38,5 @@ function jkill(){
   fi
 }
 
+# automatically fixes your 'cd folder' spelling mistakes
+shopt -s cdspell
