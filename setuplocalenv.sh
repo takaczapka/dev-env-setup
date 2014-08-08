@@ -1,6 +1,7 @@
 #!/bin/bash
 
 export PATH=$HOME/bin:$PATH
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Aliases
 alias ll='ls -alF'
@@ -40,3 +41,5 @@ function jkill(){
 
 # automatically fixes your 'cd folder' spelling mistakes
 shopt -s cdspell
+
+. "$DIR"/gitconfig.sh
