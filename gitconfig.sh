@@ -1,4 +1,5 @@
 # this can be also configured through file-based config
+git config --global push.default simple
 git config --global alias.ci '!git add -A && git commit'
 git config --global alias.st '!git status -sb'
 git config --global alias.co '!git checkout'
@@ -19,3 +20,4 @@ git config --global alias.pu '!git pull --rebase'
 git config --global alias.l '!git log --graph --all --format=format:"%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)" --abbrev-commit --date=relative'
 git config --global alias.yesterday '!git l --graph --all --since=day.before.yesterday.midnight --until=midnight'
 git config --global alias.today '!git l --graph --all --since=midnight'
+
