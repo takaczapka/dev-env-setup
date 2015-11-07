@@ -4,6 +4,7 @@ export PATH=$HOME/bin:$PATH
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Aliases
+alias ls='ls -hG'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -13,12 +14,17 @@ alias e='exit'
 alias d='cd $HOME/Downloads'
 alias dev='cd $HOME/dev'
 alias u='cd ..'
-alias pp="ps axuf | pager"
+alias ..='cd ..'
+alias pa="ps aux"
+alias du='du -kh'    # Makes a more readable output.
+alias df='df -kh'
+alias h='history'
+alias mkdir='mkdir -p'
 
 # PSEUDO ALIASES FOR COMMONLY USED LONG COMMANDS 
 # from http://cfenollosa.com/misc/tricks.txt
 function lt() { ls -ltrsa "$@" | tail; }
-function psgrep() { ps axuf | grep -v grep | grep "$@" -i --color=auto; }
+function psgrep() { ps axu | grep -v grep | grep "$@" -i --color=auto; }
 function fname() { find . -iname "*$@*"; }
 #  removes lines from $1 if they appear in $2
 function remove_lines_from() { grep -F -x -v -f $2 $1; }
@@ -43,3 +49,5 @@ function jkill(){
 shopt -s cdspell
 
 . "$DIR"/gitconfig.sh
+
+echo "Environment setup... DONE. Hello `whoami`!"
