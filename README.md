@@ -3,5 +3,5 @@ Simple dev environment console setup for **OSX**, **Ubuntu** or **Cygwin** termi
 Once pulled from GitHub into a directory of choice, add following line to your *~/.bash_profile*:
 
 ```
-. [YOUR-PATH]/useful-stuff/setuplocalenv.sh
+. [YOUR-PATH]/dev-env-setup/setuplocalenv.sh
 ```  
