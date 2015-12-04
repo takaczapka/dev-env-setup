@@ -26,6 +26,7 @@ alias mkdir='mkdir -p'
 function lt() { ls -ltrsa "$@" | tail; }
 function psgrep() { ps axu | grep -v grep | grep "$@" -i --color=auto; }
 function fname() { find . -iname "*$@*"; }
+function fnamegrep() { find . -type f -name "$1" -exec grep -i $2 {} \; ; }
 #  removes lines from $1 if they appear in $2
 function remove_lines_from() { grep -F -x -v -f $2 $1; }
 function mcd() { mkdir $1 && cd $1; }
