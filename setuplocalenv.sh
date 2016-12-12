@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export PATH=$HOME/bin:$PATH
+export PATH=$HOME/bin:$PATH:node_modules/.bin
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Aliases
