@@ -1,6 +1,12 @@
 #!/bin/bash
 
 export PATH=$HOME/bin:$PATH:node_modules/.bin
+
+export dev=~/dev
+export projects=$dev/projects
+
+export CDPATH=${CDPATH}:${dev}:${projects}:~
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Aliases
