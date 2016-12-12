@@ -57,4 +57,8 @@ shopt -s cdspell
 
 . "$DIR"/gitconfig.sh
 
+
+# requires > brew install bash-completion
+[ -f /usr/local/etc/bash_completion ] && echo "YO! " && . /usr/local/etc/bash_completion
+
 echo "Environment setup... DONE. Hello `whoami`!"
