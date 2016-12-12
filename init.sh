@@ -59,6 +59,6 @@ shopt -s cdspell
 
 
 # requires > brew install bash-completion
-[ -f /usr/local/etc/bash_completion ] && echo "YO! " && . /usr/local/etc/bash_completion
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
 echo "Environment setup... DONE. Hello `whoami`!"
