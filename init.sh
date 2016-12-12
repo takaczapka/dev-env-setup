@@ -26,6 +26,7 @@ alias du='du -kh'    # Makes a more readable output.
 alias df='df -kh'
 alias h='history'
 alias mkdir='mkdir -p'
+alias test-push='read -p "All changes locally committed? [Enter]..." && sbt clean test && git push'
 
 # PSEUDO ALIASES FOR COMMONLY USED LONG COMMANDS 
 # from http://cfenollosa.com/misc/tricks.txt
