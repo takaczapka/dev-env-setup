@@ -41,7 +41,7 @@ function remove_lines_from() { grep -F -x -v -f $2 $1; }
 function mcd() { mkdir $1 && cd $1; }
 
 # SBT 
-export SBT_OPTS="-Xmx1024M -XX:ReservedCodeCacheSize=128m"
+export SBT_OPTS="-Xmx2024M -XX:ReservedCodeCacheSize=128m"
 
 function jkill(){
   local to_kill=$1
