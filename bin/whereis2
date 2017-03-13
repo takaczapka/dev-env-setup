@@ -1,0 +1,18 @@
+#!/bin/bash
+# looks for a file in all PATH folders
+# can be used with *, ie. whereis2 gradl*
+
+die () {
+    echo >&2 "$@"
+    exit 1
+}
+
+[ "$#" -eq 1 ] || die "1 argument required, $# provided"
+
+# path dirs line by line
+pathFolders=${PATH//:/$'\n'}
+
+for folder in $pathFolders
+do
+	find $folder -name $1
+done

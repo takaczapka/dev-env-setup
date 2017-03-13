@@ -1,6 +1,8 @@
 #!/bin/bash
 
-export PATH=$HOME/bin:$PATH:node_modules/.bin
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+export PATH=$HOME/bin:$PATH:node_modules/.bin:$DIR/bin
 
 export PS1="\[\e]0;\w\a\]\n\$(${EMOTE}) \[\e[32m\]\u@\h \[\e[33m\]\w\e[0m\]\n\$ "
 
@@ -8,8 +10,6 @@ export dev=~/dev
 export projects=$dev/projects
 
 export CDPATH=${CDPATH}:${dev}:${projects}:~
-
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Aliases
 alias ls='ls -hG'
