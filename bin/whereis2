@@ -1,6 +1,5 @@
 #!/bin/bash
-# looks for a file in all PATH folders
-# can be used with *, ie. whereis2 gradl*
+# looks for all matches starting with argument  in all PATH folders
 
 die () {
     echo >&2 "$@"
@@ -14,5 +13,7 @@ pathFolders=${PATH//:/$'\n'}
 
 for folder in $pathFolders
 do
-	find $folder -name $1
+  if [ -d "$folder" ]; then
+	   find $folder -name $1*
+  fi
 done
