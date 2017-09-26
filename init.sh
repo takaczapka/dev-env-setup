@@ -30,7 +30,8 @@ alias du='du -kh'    # Makes a more readable output.
 alias df='df -kh'
 alias h='history'
 alias mkdir='mkdir -p'
-alias test-push='read -p "All changes locally committed? [Enter]..." && sbt clean test && git push'
+alias test-push='read -p "All changes locally committed? [Enter]..." && git pull --rebase && sbt clean test && git push'
+alias http='python -mSimpleHTTPServer'
 
 # PSEUDO ALIASES FOR COMMONLY USED LONG COMMANDS 
 # from http://cfenollosa.com/misc/tricks.txt
@@ -65,5 +66,8 @@ shopt -s cdspell
 
 # requires > brew install bash-completion
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+
+# requires > brew install thefuck
+eval $(thefuck --alias)
 
 echo "Environment setup... DONE. Hello `whoami`!"
