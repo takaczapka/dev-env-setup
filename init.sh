@@ -32,8 +32,9 @@ alias h='history'
 alias mkdir='mkdir -p'
 alias test-push='read -p "All changes locally committed? [Enter]..." && git pull --rebase && sbt clean test && git push'
 alias http='python -mSimpleHTTPServer'
+alias noproxy="source $DIR/bin/noproxy.sh"
 
-# PSEUDO ALIASES FOR COMMONLY USED LONG COMMANDS 
+# PSEUDO ALIASES FOR COMMONLY USED LONG COMMANDS
 # from http://cfenollosa.com/misc/tricks.txt
 function lt() { ls -ltrsa "$@" | tail; }
 function psgrep() { ps axu | grep -v grep | grep "$@" -i --color=auto; }
@@ -43,7 +44,7 @@ function fnamegrep() { find . -type f -name "$1" -exec grep -i $2 {} \; ; }
 function remove_lines_from() { grep -F -x -v -f $2 $1; }
 function mcd() { mkdir $1 && cd $1; }
 
-# SBT 
+# SBT
 export SBT_OPTS="-Xmx2024M -XX:ReservedCodeCacheSize=128m"
 
 function jkill(){
@@ -53,7 +54,7 @@ function jkill(){
   then
     kill -9 $pids
     echo "Killed Java processes for" \"$to_kill\" "with pid(s):" $pids
-  else 
+  else
     echo "Nothing to kill"
   fi
 }
