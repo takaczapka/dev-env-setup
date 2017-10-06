@@ -4,9 +4,33 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 export PATH=$HOME/bin:$PATH:node_modules/.bin:$DIR/bin
 
-export PS1="\[\e]0;\w\a\]\n\$(${EMOTE}) \[\e[32m\]\u@\h \[\e[33m\]\w\e[0m\]\n\$ "
+# inspired by https://stackoverflow.com/questions/16715103/bash-prompt-with-last-exit-code
+PROMPT_COMMAND=__prompt_command # Func to gen PS1 before generating each cmd prompt
 
-export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+__prompt_command() {
+    local EXIT="$?"             # This needs to be first
+    PS1=""
+
+    local ResetCol='\[\e[0m\]'
+
+    local Red='\[\e[0;31m\]'
+    local Green='\[\e[0;32m\]'
+    local Yellow='\[\e[1;33m\]'
+    local Blue='\[\e[1;34m\]'
+    local Purple='\[\e[0;35m\]'
+
+    if [ $EXIT != 0 ]; then
+        ERROR="${Red}($EXIT)${ResetCol} "
+    else
+        ERROR=""
+    fi
+
+    PS1+="${Green}\u${ResetCol}@${Blue}\h ${Yellow}\w ${ERROR}${ResetCol}$ "
+}
+
+# https://www.cyberciti.biz/tips/bash-shell-parameter-substitution-2.html
+OSX_JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+export JAVA_HOME=${JAVA_HOME:-$OSX_JAVA_HOME}
 
 export dev=~/dev
 export projects=$dev/projects
