@@ -7,7 +7,15 @@ export PATH=$HOME/bin:$PATH:node_modules/.bin:$DIR/bin
 # inspired by https://stackoverflow.com/questions/16715103/bash-prompt-with-last-exit-code
 PROMPT_COMMAND=__prompt_command # Func to gen PS1 before generating each cmd prompt
 
+function git_branch_in_prompt {
+  local branch=`git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\\[\1\]/'`
+  local lightBlue=36 # Blue
+
+  echo -n '\[\e[01;'"$lightBlue"'m\]'"$branch"
+}
+
 __prompt_command() {
+
     local EXIT="$?"             # This needs to be first
     PS1=""
 
@@ -25,7 +33,7 @@ __prompt_command() {
         ERROR=""
     fi
 
-    PS1+="${Green}\u${ResetCol}@${Blue}\h ${Yellow}\w ${ERROR}${ResetCol}$ "
+    PS1+="${Green}\u${ResetCol}@${Blue}\h ${Yellow}\w `git_branch_in_prompt`${ERROR}${ResetCol}$ "
 }
 
 # https://www.cyberciti.biz/tips/bash-shell-parameter-substitution-2.html
@@ -38,7 +46,7 @@ export projects=$dev/projects
 export CDPATH=${CDPATH}:${dev}:${projects}:~
 
 # Aliases
-alias ls='ls -hG'
+alias ls='ls -hGF'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
