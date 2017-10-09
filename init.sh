@@ -37,7 +37,11 @@ __prompt_command() {
 }
 
 # https://www.cyberciti.biz/tips/bash-shell-parameter-substitution-2.html
-OSX_JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+OSX_JAVA_HOME_BIN_PATH="/usr/libexec/java_home"
+if [ -f $OSX_JAVA_HOME_BIN_PATH ]
+then
+  OSX_JAVA_HOME="$($OSX_JAVA_HOME_BIN_PATH -v 1.8)"
+fi
 export JAVA_HOME=${JAVA_HOME:-$OSX_JAVA_HOME}
 
 export dev=~/dev
