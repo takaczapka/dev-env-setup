@@ -70,6 +70,19 @@ alias test-push='read -p "All changes locally committed? [Enter]..." && git pull
 alias http='python -mSimpleHTTPServer'
 alias noproxy="source $DIR/bin/noproxy.sh"
 
+# some useful docker aliases
+# Kill all running containers.
+alias dockerkillall='docker kill $(docker ps -q)'
+# Delete all stopped containers.
+alias dockercleanc='printf "\n>>> Deleting stopped containers\n\n" && docker rm $(docker ps -a -q)'
+# Delete all untagged images.
+alias dockercleani='printf "\n>>> Deleting untagged images\n\n" && docker rmi $(docker images -q -f dangling=true)'
+# Delete all stopped containers and untagged images.
+alias dockerclean='dockercleanc || true && dockercleani'
+
+
+function wget-suck() { wget -m -k -K -E -l 7 -t 6 $1; }
+
 # PSEUDO ALIASES FOR COMMONLY USED LONG COMMANDS
 # from http://cfenollosa.com/misc/tricks.txt
 function lt() { ls -ltrsa "$@" | tail; }
