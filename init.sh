@@ -93,6 +93,10 @@ function fnamegrep() { find . -type f -name "$1" -exec grep -i $2 {} \; ; }
 function remove_lines_from() { grep -F -x -v -f $2 $1; }
 function mcd() { mkdir $1 && cd $1; }
 
+
+function tgz() { tar -zcvf $1.tar.gz $1; }
+function untgz() { tar -zxvf $1; }
+
 # SBT
 export SBT_OPTS="-Xmx2024M -XX:ReservedCodeCacheSize=128m"
 
