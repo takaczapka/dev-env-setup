@@ -112,6 +112,10 @@ function jkill(){
   fi
 }
 
+function runs-on-port() {
+  lsof -n -i :$1 | grep LISTEN
+}
+
 # automatically fixes your 'cd folder' spelling mistakes
 shopt -s cdspell
 
@@ -122,6 +126,6 @@ shopt -s cdspell
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
 # requires > brew install thefuck
-eval $(thefuck --alias)
+# eval $(thefuck --alias)
 
 echo "Environment setup... DONE. Hello `whoami`!"
