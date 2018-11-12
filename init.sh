@@ -116,6 +116,11 @@ function runs-on-port() {
   lsof -n -i :$1 | grep LISTEN
 }
 
+# sets a title for a current iterm tab
+function title {
+    echo -ne "\033]0;"$*"\007"
+}
+
 # automatically fixes your 'cd folder' spelling mistakes
 shopt -s cdspell
 
