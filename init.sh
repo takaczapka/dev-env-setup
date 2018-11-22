@@ -69,6 +69,7 @@ alias mkdir='mkdir -p'
 alias test-push='read -p "All changes locally committed? [Enter]..." && git pull --rebase && sbt clean test && git push'
 alias http='python -mSimpleHTTPServer'
 alias noproxy="source $DIR/bin/noproxy.sh"
+alias grep='grep --color=auto'
 
 # some useful docker aliases
 # Kill all running containers.
