@@ -89,6 +89,7 @@ function wget-suck() { wget -m -k -K -E -l 7 -t 6 $1; }
 function lt() { ls -ltrsa "$@" | tail; }
 function psgrep() { ps axu | grep -v grep | grep "$@" -i --color=auto; }
 function fname() { find . -iname "*$@*"; }
+function gname() { grep -R --include="$1" $2 .; }
 function fnamegrep() { find . -type f -name "$1" -exec grep -i $2 {} \; ; }
 #  removes lines from $1 if they appear in $2
 function remove_lines_from() { grep -F -x -v -f $2 $1; }
@@ -128,8 +129,15 @@ shopt -s cdspell
 . "$DIR"/gitconfig.sh
 
 
-# requires > brew install bash-completion
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+# requires > brew install bash-completion@2 (requires bash version >= 4) https://itnext.io/upgrading-bash-on-macos-7138bd1066ba
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
+# kubectl completions
+source <(kubectl completion bash)
+
+# alias k
+alias k=kubectl
+complete -F __start_kubectl k
 
 # requires > brew install thefuck
 # eval $(thefuck --alias)
