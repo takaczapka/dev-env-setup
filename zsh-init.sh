@@ -3,7 +3,6 @@
 DIR="$( cd "$( dirname "${(%):-%N}" )" && pwd )"
 
 export PATH=$HOME/bin:$PATH
-
 export dev=$HOME/dev
 
 # Aliases
