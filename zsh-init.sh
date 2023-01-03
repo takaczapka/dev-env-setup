@@ -5,6 +5,8 @@ DIR="$( cd "$( dirname "${(%):-%N}" )" && pwd )"
 export PATH=$HOME/bin:$PATH
 export dev=$HOME/dev
 
+export CDPATH=${CDPATH}:${dev}:~
+
 # Aliases
 alias ls='ls -hGF'
 alias ll='ls -alF'
@@ -24,7 +26,7 @@ alias h='history'
 alias mkdir='mkdir -p'
 alias test-push='read -p "All changes locally committed? [Enter]..." && git pull --rebase && sbt clean test && git push'
 alias http='python -mSimpleHTTPServer'
-alias grep='grep --color=auto'
+alias grep='grep -i --color=auto'
 
 # some useful docker aliases
 # Kill all running containers.
@@ -72,9 +74,12 @@ function runs-on-port() {
 
 export JAVA_11_HOME=$(/usr/libexec/java_home -v11)
 export JAVA_14_HOME=$(/usr/libexec/java_home -v14)
+export JAVA_16_HOME=$(/usr/libexec/java_home -v16)
 
 alias java11='export JAVA_HOME=$JAVA_11_HOME'
 alias java14='export JAVA_HOME=$JAVA_14_HOME'
+alias java16='export JAVA_HOME=$JAVA_16_HOME'
 
-# default to Java 14
-java14
+
+# default to Java 16
+java16
