@@ -1,48 +1,8 @@
-#!/bin/bash
+#!/bin/zsh
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DIR=$(dirname "$(realpath "$0")")
 
 export PATH=$HOME/bin:$PATH:node_modules/.bin:$DIR/bin
-
-# inspired by https://stackoverflow.com/questions/16715103/bash-prompt-with-last-exit-code
-PROMPT_COMMAND=__prompt_command # Func to gen PS1 before generating each cmd prompt
-
-function git_branch_in_prompt {
-  local branch=`git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\\[\1\]/'`
-  local lightBlue=36 # Blue
-
-  echo -n '\[\e[01;'"$lightBlue"'m\]'"$branch"
-}
-
-__prompt_command() {
-
-    local EXIT="$?"             # This needs to be first
-    PS1=""
-
-    local ResetCol='\[\e[0m\]'
-
-    local Red='\[\e[0;31m\]'
-    local Green='\[\e[0;32m\]'
-    local Yellow='\[\e[1;33m\]'
-    local Blue='\[\e[1;34m\]'
-    local Purple='\[\e[0;35m\]'
-
-    if [ $EXIT != 0 ]; then
-        ERROR="${Red}($EXIT)${ResetCol} "
-    else
-        ERROR=""
-    fi
-
-    PS1+="${Green}\u${ResetCol}@${Blue}\h ${Yellow}\w `git_branch_in_prompt`${ERROR}${ResetCol}$ "
-}
-
-# https://www.cyberciti.biz/tips/bash-shell-parameter-substitution-2.html
-OSX_JAVA_HOME_BIN_PATH="/usr/libexec/java_home"
-if [ -f $OSX_JAVA_HOME_BIN_PATH ]
-then
-  OSX_JAVA_HOME="$($OSX_JAVA_HOME_BIN_PATH -v 11)"
-fi
-export JAVA_HOME=${JAVA_HOME:-$OSX_JAVA_HOME}
 
 export dev=~/dev
 export projects=$dev/projects
@@ -69,7 +29,7 @@ alias mkdir='mkdir -p'
 alias test-push='read -p "All changes locally committed? [Enter]..." && git pull --rebase && sbt clean test && git push'
 alias http='python -mSimpleHTTPServer'
 alias noproxy="source $DIR/bin/noproxy.sh"
-alias grep='grep --color=auto'
+alias grep='grep -i --color=auto'
 
 # some useful docker aliases
 # Kill all running containers.
@@ -80,7 +40,6 @@ alias dockercleanc='printf "\n>>> Deleting stopped containers\n\n" && docker rm 
 alias dockercleani='printf "\n>>> Deleting untagged images\n\n" && docker rmi $(docker images -q -f dangling=true)'
 # Delete all stopped containers and untagged images.
 alias dockerclean='dockercleanc || true && dockercleani'
-
 
 function wget-suck() { wget -m -k -K -E -l 7 -t 6 $1; }
 
@@ -94,13 +53,8 @@ function fnamegrep() { find . -type f -name "$1" -exec grep -i $2 {} \; ; }
 #  removes lines from $1 if they appear in $2
 function remove_lines_from() { grep -F -x -v -f $2 $1; }
 function mcd() { mkdir $1 && cd $1; }
-
-
 function tgz() { tar -zcvf $1.tar.gz $1; }
 function untgz() { tar -zxvf $1; }
-
-# SBT
-export SBT_OPTS="-Xmx2024M -XX:ReservedCodeCacheSize=128m"
 
 function jkill(){
   local to_kill=$1
@@ -118,28 +72,30 @@ function runs-on-port() {
   lsof -n -i :$1 | grep LISTEN
 }
 
+
 # sets a title for a current iterm tab
 function title {
     echo -ne "\033]0;"$*"\007"
 }
 
-# automatically fixes your 'cd folder' spelling mistakes
-shopt -s cdspell
+sauce() {
+    source ~/.zshrc
+}
+
+
 
 . "$DIR"/gitconfig.sh
 
+export JAVA_11_HOME=$(/usr/libexec/java_home -v11)
+export JAVA_14_HOME=$(/usr/libexec/java_home -v14)
+export JAVA_16_HOME=$(/usr/libexec/java_home -v16)
 
-# requires > brew install bash-completion@2 (requires bash version >= 4) https://itnext.io/upgrading-bash-on-macos-7138bd1066ba
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+alias java11='export JAVA_HOME=$JAVA_11_HOME'
+alias java14='export JAVA_HOME=$JAVA_14_HOME'
+alias java16='export JAVA_HOME=$JAVA_16_HOME'
 
-# kubectl completions
-source <(kubectl completion bash)
 
-# alias k
-alias k=kubectl
-complete -F __start_kubectl k
-
-# requires > brew install thefuck
-# eval $(thefuck --alias)
+# default to Java 16
+# java16
 
 echo "Environment setup... DONE. Hello `whoami`!"
